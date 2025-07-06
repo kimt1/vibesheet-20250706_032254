@@ -1,0 +1,108 @@
+import os
+import threading
+import datetime
+import logging
+import locale
+
+LOG_FILE = "activity.log"
+LOG_MAX_BYTES = 5 * 1024 * 1024  # 5 MB
+LOG_BACKUP_COUNT = 3
+
+class ActivityLogger:
+    _instance = None
+    _lock = threading.Lock()
+
+    @classmethod
+    def get_logger(cls):
+        with cls._lock:
+            if not cls._instance:
+                cls._instance = cls()
+            return cls._instance
+
+    def __init__(self):
+        self._log_lock = threading.Lock()
+        self._setup_logger()
+
+    def _setup_logger(self):
+        try:
+            locale.setlocale(locale.LC_ALL, '')
+        except locale.Error:
+            pass
+
+        self.logger = logging.getLogger("ActivityLogger")
+        self.logger.setLevel(logging.INFO)
+        formatter = logging.Formatter('%(asctime)s | %(levelname)s | %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
+
+        from logging.handlers import RotatingFileHandler
+        # Only add a handler if not already present (avoid duplicate handlers)
+        handler_names = [type(h).__name__ for h in self.logger.handlers]
+        if 'RotatingFileHandler' not in handler_names or not self.logger.handlers:
+            file_handler = RotatingFileHandler(LOG_FILE, maxBytes=LOG_MAX_BYTES, backupCount=LOG_BACKUP_COUNT, encoding='utf-8')
+            file_handler.setFormatter(formatter)
+            file_handler.setLevel(logging.INFO)
+            # Clear incompatible handlers (just one handler should exist)
+            self.logger.handlers = [h for h in self.logger.handlers if isinstance(h, RotatingFileHandler)]
+            self.logger.addHandler(file_handler)
+
+    def log(self, message, level='info'):
+        with self._log_lock:
+            if level == 'debug':
+                self.logger.debug(message)
+            elif level == 'warning':
+                self.logger.warning(message)
+            elif level == 'error':
+                self.logger.error(message)
+            elif level == 'critical':
+                self.logger.critical(message)
+            else:
+                self.logger.info(message)
+
+    def log_event(self, event, details=None):
+        now = datetime.datetime.now().isoformat()
+        parts = [f"event={event}", f"time={now}"]
+        if details:
+            for k, v in details.items():
+                parts.append(f"{k}={repr(str(v))}")
+        self.log(" | ".join(parts), level='info')
+
+    def log_security(self, action, username, ip_address, status, details=None):
+        d = f"action={action} | user={username} | ip={ip_address} | status={status}"
+        if details:
+            if isinstance(details, dict):
+                d += " | " + " | ".join(f"{k}={repr(v)}" for k, v in details.items())
+            else:
+                d += f" | details={repr(details)}"
+        self.log(d, level='warning' if status != 'success' else 'info')
+
+    def get_recent_entries(self, count=100):
+        """Return the last `count` lines from the log with minimal memory use."""
+        if not os.path.exists(LOG_FILE):
+            return []
+        lines = []
+        with open(LOG_FILE, 'rb') as f:
+            f.seek(0, os.SEEK_END)
+            filesize = f.tell()
+            buffer = bytearray()
+            pointer = filesize
+            newlines_found = 0
+            # Read blocks from the file end backward until enough lines are found
+            while pointer > 0 and newlines_found < count:
+                read_size = min(4096, pointer)
+                pointer -= read_size
+                f.seek(pointer)
+                chunk = f.read(read_size)
+                buffer = chunk + buffer
+                newlines_found = buffer.count(b'\n')
+            entries = buffer.split(b'\n')[-count if count > 0 else None :]
+            lines = [line.decode('utf-8', errors='ignore') for line in entries if line.strip()]
+        return lines
+
+    # NOTE: For true multiprocess log safety, see Python logging docs.
+    # RotatingFileHandler is process-safe within Python, but not across non-Python writers or log rotation tools.
+
+
+# Example usage:
+# logger = ActivityLogger.get_logger()
+# logger.log("System initialized.")
+# logger.log_event("form_detected", {"form_id": 42, "url": "https://example.com/form"})
+# logger.log_security("login_attempt", "alice", "192.0.2.10", "failed", {"reason": "invalid password"})
