@@ -14,8 +14,8 @@ function isValidString(val, maxLength = 128) {
 }
 function sanitizeString(val, maxLength = 512) {
     if (typeof val !== 'string') return '';
-    // Remove control chars, angle brackets, force string
-    return val.replace(/[\x00-\x08\x0E-\x1F\x7F<>]/g, '').substring(0, maxLength);
+    // Remove angle brackets, force string
+    return val.replace(/[<>]/g, '').substring(0, maxLength);
 }
 function cleanEventData(eventData) {
     if (typeof eventData !== 'object' || eventData === null) return {};
@@ -67,7 +67,9 @@ async function logToFile(filepath, data) {
         try {
             const errData = { logError: err.message || String(err), originalData: (data && data.type) ? data.type : undefined, filepath, timestamp: new Date().toISOString() };
             await fs.promises.appendFile(ERROR_LOG, JSON.stringify(errData) + '\n', { encoding: 'utf8', mode: 0o600 });
-        } catch {} // Silently ignore, last resort
+        } catch {
+            // Silently ignore, last resort
+        }
     }
 }
 

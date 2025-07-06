@@ -1,7 +1,9 @@
 function log() {
   try { 
     console.log('[FormMaster]', ...arguments); 
-  } catch (_) {}
+  } catch (_) {
+    // Ignore console errors
+  }
 }
 
 function sendMessageToBackground(message) {

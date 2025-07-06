@@ -1,11 +1,14 @@
-function log(message, data) {
+(function() {
+  function log(message, data) {
     try {
       if (data !== undefined) {
         console.log(`[FormMaster] ${message}`, data);
       } else {
         console.log(`[FormMaster] ${message}`);
       }
-    } catch (e) {}
+    } catch (e) {
+      // Ignore console errors
+    }
   }
 
   // 1. Initialize Content Script

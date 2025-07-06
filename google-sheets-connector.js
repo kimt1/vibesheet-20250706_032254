@@ -45,7 +45,7 @@ class GoogleSheetsConnector extends EventEmitter {
     }
 
     async fetchSpreadsheetData(sheetId, range) {
-        this.#ensureInitialized();
+        this._ensureInitialized();
         const res = await this.sheets.spreadsheets.values.get({
             spreadsheetId: sheetId,
             range,
@@ -54,7 +54,7 @@ class GoogleSheetsConnector extends EventEmitter {
     }
 
     async saveMappingToSheet(sheetId, mappingData) {
-        this.#ensureInitialized();
+        this._ensureInitialized();
         let values = mappingData;
         if (!Array.isArray(mappingData[0])) {
             values = [mappingData];
@@ -74,7 +74,7 @@ class GoogleSheetsConnector extends EventEmitter {
     }
 
     listenForSheetUpdates(sheetId, callback, range = 'A1:Z1000', intervalMs = 5000) {
-        this.#ensureInitialized();
+        this._ensureInitialized();
         const normRange = (range || '').trim().toUpperCase();
         const intervalKey = `${sheetId}_${normRange}`;
         if (this.pollIntervals[intervalKey]) return; // Already listening
@@ -118,7 +118,7 @@ class GoogleSheetsConnector extends EventEmitter {
         });
     }
 
-    #ensureInitialized() {
+    _ensureInitialized() {
         if (!this.sheets) throw new Error('Google Sheets not initialized. Call initGoogleAuth first.');
     }
 }

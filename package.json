@@ -2,6 +2,7 @@
   "name": "form-master-j47",
   "version": "1.0.0",
   "description": "Form Master by J47: A scalable web automation platform for automatic form detection, filling, and submission on diverse web applications, including private/protected sites.",
+  "type": "module",
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
@@ -50,7 +51,7 @@
     "@babel/core": "^7.24.7",
     "@babel/preset-env": "^7.24.7",
     "lint-staged": "^15.2.1",
-    "formatjs-cli": "^6.8.0"
+    "@formatjs/cli": "^6.7.2"
   },
   "lint-staged": {
     "*.js": [

@@ -1,3 +1,5 @@
+import React, { useState, useEffect } from 'react';
+
 const SIDEBAR_SECTIONS = [
   { id: 'dashboard', label: { en: 'Dashboard', es: 'Tablero' }, icon: '?' },
   { id: 'forms', label: { en: 'Forms', es: 'Formularios' }, icon: '?' },

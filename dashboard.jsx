@@ -1,3 +1,6 @@
+import React, { useState, useEffect } from 'react';
+import { notification } from 'antd'; // Added Ant Design notification import
+
 // Placeholder API function implementations:
 // Remove and replace with real functions as appropriate for integration.
 const oauthLogin = async (oauthData) => {
@@ -20,9 +23,7 @@ const getSubmissionStats = async () => ({
 const exportAnalytics = async (format) => true;
 const scheduleBatch = async (batchSettings) => true;
 
-const Dashboard = ({
-  // Accept props here if needed in the future
-}) => {
+const Dashboard = (props) => { // Changed to accept props directly
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [googleSheetsConnected, setGoogleSheetsConnected] = useState(false);
