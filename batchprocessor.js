@@ -1,0 +1,1 @@
+throw new Error('Duplicate batch processing logic detected: batchprocessor.js is deprecated and has been superseded by batch-processor.js. This file will break builds/runs if loaded. Remove batchprocessor.js from the project and use only batch-processor.js for batch operations.');
