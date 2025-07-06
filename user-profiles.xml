@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<userProfiles>
+    <profile id="default">
+        <name>Default User</name>
+        <description>Generic user profile for basic operations.</description>
+        <preferences>
+            <autoFill>true</autoFill>
+            <saveHistory>true</saveHistory>
+            <simulateHumanBehavior>true</simulateHumanBehavior>
+            <fallbackMode>auto</fallbackMode>
+            <language>en-US</language>
+        </preferences>
+        <security>
+            <usePrivateMode>false</usePrivateMode>
+            <dataEncryption>true</dataEncryption>
+            <allowThirdPartyCookies>false</allowThirdPartyCookies>
+        </security>
+        <limits>
+            <formsPerHour>20</formsPerHour>
+            <maxConcurrentSessions>2</maxConcurrentSessions>
+        </limits>
+    </profile>
+    <profile id="poweruser">
+        <name>Power User</name>
+        <description>Profile for advanced and heavy users.</description>
+        <preferences>
+            <autoFill>true</autoFill>
+            <saveHistory>true</saveHistory>
+            <simulateHumanBehavior>true</simulateHumanBehavior>
+            <fallbackMode>manual</fallbackMode>
+            <language>en-US</language>
+        </preferences>
+        <security>
+            <usePrivateMode>true</usePrivateMode>
+            <dataEncryption>true</dataEncryption>
+            <allowThirdPartyCookies>false</allowThirdPartyCookies>
+        </security>
+        <limits>
+            <formsPerHour>100</formsPerHour>
+            <maxConcurrentSessions>10</maxConcurrentSessions>
+        </limits>
+    </profile>
+    <profile id="guest">
+        <name>Guest User</name>
+        <description>Temporary profile with limited features and lower access.</description>
+        <preferences>
+            <autoFill>false</autoFill>
+            <saveHistory>false</saveHistory>
+            <simulateHumanBehavior>true</simulateHumanBehavior>
+            <fallbackMode>none</fallbackMode>
+            <language>en-US</language>
+        </preferences>
+        <security>
+            <usePrivateMode>true</usePrivateMode>
+            <dataEncryption>false</dataEncryption>
+            <allowThirdPartyCookies>false</allowThirdPartyCookies>
+        </security>
+        <limits>
+            <formsPerHour>2</formsPerHour>
+            <maxConcurrentSessions>1</maxConcurrentSessions>
+        </limits>
+    </profile>
+    <profile id="admin">
+        <name>Administrator</name>
+        <description>Administrator profile with full access and extended security.</description>
+        <preferences>
+            <autoFill>true</autoFill>
+            <saveHistory>true</saveHistory>
+            <simulateHumanBehavior>false</simulateHumanBehavior>
+            <fallbackMode>auto</fallbackMode>
+            <language>en-US</language>
+        </preferences>
+        <security>
+            <usePrivateMode>true</usePrivateMode>
+            <dataEncryption>true</dataEncryption>
+            <allowThirdPartyCookies>false</allowThirdPartyCookies>
+        </security>
+        <limits>
+            <formsPerHour>1000000</formsPerHour>
+            <maxConcurrentSessions>1000000</maxConcurrentSessions>
+        </limits>
+    </profile>
+</userProfiles>
