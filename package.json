@@ -1,0 +1,61 @@
+{
+  "name": "form-master-j47",
+  "version": "1.0.0",
+  "description": "Form Master by J47: A scalable web automation platform for automatic form detection, filling, and submission on diverse web applications, including private/protected sites.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "jest",
+    "lint": "eslint . --ext .js,.jsx",
+    "build": "webpack --mode production",
+    "i18n:extract": "formatjs extract 'src/**/*.{js,jsx,ts,tsx}' --out-file locales/messages.pot",
+    "log:clean": "rm -f logs/*.log",
+    "precommit": "lint-staged"
+  },
+  "keywords": [
+    "automation",
+    "web automation",
+    "form filling",
+    "bot",
+    "AI",
+    "simulated interaction",
+    "scalable",
+    "detection"
+  ],
+  "author": "J47",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "puppeteer": "^21.3.8",
+    "axios": "^1.7.2",
+    "cheerio": "^1.0.0-rc.12",
+    "express": "^4.19.2",
+    "winston": "^3.10.0",
+    "dotenv": "^16.4.5",
+    "i18next": "^23.10.1",
+    "csv-parse": "^5.5.7",
+    "xml2js": "^0.6.2",
+    "ini": "^4.1.0"
+  },
+  "devDependencies": {
+    "jest": "^30.0.2",
+    "eslint": "^9.1.1",
+    "nodemon": "^3.1.0",
+    "webpack": "^5.90.2",
+    "webpack-cli": "^5.1.4",
+    "babel-loader": "^9.1.4",
+    "@babel/core": "^7.24.7",
+    "@babel/preset-env": "^7.24.7",
+    "lint-staged": "^15.2.1",
+    "formatjs-cli": "^6.8.0"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "jest --bail --findRelatedTests"
+    ]
+  }
+}
