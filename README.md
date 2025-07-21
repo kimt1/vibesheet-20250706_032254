@@ -7,7 +7,7 @@
 
 ## Overview
 
-**vibesheet-20250706_032254** (Form Master by J47) is a **modular, privacy-focused web automation platform** designed for **automatic detection, filling, and submission of web forms**?even on private/protected sites. The solution combines a cross-browser extension, scalable Node.js backend, and a rich React dashboard UI with deep Google Sheets integration. It is ideal for publishers, marketers, and sellers who require reliable batch automation, advanced error handling, analytics, and robust fallback strategies.
+**vibesheet-20250706_032254** (Form Master by J47) is a **modular, privacy-focused web automation platform** designed for **automatic detection, filling, and submission of web forms**—even on private/protected sites. The solution combines a cross-browser extension, scalable Node.js backend, and a rich React dashboard UI with deep Google Sheets integration. It is ideal for publishers, marketers, and sellers who require reliable batch automation, advanced error handling, analytics, and robust fallback strategies.
 
 **Core capabilities:**  
 - Detects and interacts with complex web forms (including Shadow DOM and CAPTCHA challenges)
@@ -184,10 +184,10 @@ npm install
 ## Additional Notes
 
 - All user configurations, mappings, and batch profiles are securely stored (XML/INI for structure, encrypted at rest in cloud).
-- Privacy and session security are prioritized?automation runs in isolated contexts with careful cookie/session handling.
+- Privacy and session security are prioritized—automation runs in isolated contexts with careful cookie/session handling.
 - Pluggable detection and simulation modules allow for fast adaptation to new form types or anti-bot mitigations.
 - Supports multi-user environments with customizable access controls.
-- The platform is extensible?future modules may support non-Google spreadsheets, API integrations, or machine learning-based detection.
+- The platform is extensible—future modules may support non-Google spreadsheets, API integrations, or machine learning-based detection.
 
 ---
 
@@ -200,5 +200,5 @@ npm install
 
 ---
 
-_Copyright ? 2024_
+_Copyright © 2024_
 ```
