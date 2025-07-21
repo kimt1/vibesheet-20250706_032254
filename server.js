@@ -318,7 +318,10 @@ function startServer() {
     });
 }
 
-startServer();
+// Start server only when executed directly
+if (require.main === module) {
+    startServer();
+}
 
 module.exports = {
     startServer,
