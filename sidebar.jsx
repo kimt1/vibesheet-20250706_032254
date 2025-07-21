@@ -1,7 +1,7 @@
 const SIDEBAR_SECTIONS = [
   { id: 'dashboard', label: { en: 'Dashboard', es: 'Tablero' }, icon: '?' },
   { id: 'forms', label: { en: 'Forms', es: 'Formularios' }, icon: '?' },
-  { id: 'settings', label: { en: 'Settings', es: 'Configuraci?n' }, icon: '??' },
+  { id: 'settings', label: { en: 'Settings', es: 'Configuración' }, icon: '??' },
 ];
 
 const THEMES = ['light', 'dark'];
@@ -29,7 +29,7 @@ export default function Sidebar(props) {
     if (props.onSectionChange) props.onSectionChange(sectionId);
     triggerNotification(
       locale === 'es'
-        ? 'Secci?n cambiada'
+        ? 'Sección cambiada'
         : 'Section changed'
     );
   }
@@ -56,7 +56,7 @@ export default function Sidebar(props) {
     if (props.onLocaleChange) props.onLocaleChange(selectedLocale);
     triggerNotification(
       selectedLocale === 'es'
-        ? 'Idioma cambiado a Espa?ol'
+        ? 'Idioma cambiado a Español'
         : 'Language switched to English'
     );
   }
